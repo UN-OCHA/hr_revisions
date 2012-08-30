@@ -1,0 +1,8 @@
+.hr-revisions-clear {
+  color: #660000;
+  text-decoration: none;
+  outline: 1px;
+  background: #E6E7E8;
+  padding: 0 3px 0 3px;
+  cursor: pointer;
+}
