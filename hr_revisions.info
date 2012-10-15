@@ -3,10 +3,15 @@ description = Manages node and field revisions
 core = 7.x
 package = Humanitarianresponse
 php = 5.2.4
-version = 7.x-1.0
-project = hr_revisions
 dependencies[] = diff
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[variable][] = diff_admin_path_node
+l10n path = http://localize.humanitarianresponse.info/sites/localize.humanitarianresponse.info/files/l10n_packager/%core/%project/%project-%release.%language.po
+l10n server = localize.humanitarianresponse.info
+l10n url = http://localize.humanitarianresponse.info/sites/localize.humanitarianresponse.info/files/l10n_packager/l10n_server.xml
+
+version = "master-dev"
+project = "hr_revisions"
+datestamp = "1342528393"
