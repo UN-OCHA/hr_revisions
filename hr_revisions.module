@@ -52,12 +52,14 @@ function hr_revisions_show_revisions(&$form, $node, $content_type, $revisioned_f
       $previous_node = node_load($node->nid, $last_revision->vid);
       $diff = diff_entity_diff($previous_node, $node, array('entity_type' => 'node', 'view_mode' => FALSE));      
       foreach ($revisioned_fields as $field) {
-        $description = t('This entry has been carried over from "@field_title" from @date.', array('@field_title' => $form[$field]['und'][0]['value']['#title'], '@date' => format_date($previous_node->created)));
-        if ($diff[$field]['#new'] != $diff[$field]['#old']) {
-          $description .= ' ' . t('Changed from "@old_value" in the last revision from @date', array('@old_value' => $diff[$field]['#old'], '@date' => format_date($previous_node->changed)));
+        if (isset($form[$field]['und'][0]['value'])) {
+          $description = t('This entry has been carried over from "@field_title" from @date.', array('@field_title' => $form[$field]['und'][0]['value']['#title'], '@date' => format_date($previous_node->created)));
+          if ($diff[$field]['#new'] != $diff[$field]['#old']) {
+            $description .= ' ' . t('Changed from "@old_value" in the last revision from @date', array('@old_value' => $diff[$field]['#old'], '@date' => format_date($previous_node->changed)));
+          }
+          $description .= ' <span class="hr-revisions-clear">' . t('clear') . '</span>'; 
+          $form[$field]['und'][0]['value']['#description'] = $description;
         }
-        $description .= ' <span class="hr-revisions-clear">' . t('clear') . '</span>'; 
-        $form[$field]['und'][0]['value']['#description'] = $description;
       }
     }
   }
