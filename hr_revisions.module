@@ -21,7 +21,7 @@ function hr_revisions_form_indicator_data_batch_node_form_alter(&$form, &$form_s
 function hr_revisions_form_sectoral_analysis_node_form_alter(&$form, &$form_state, $form_id) {
   drupal_add_css(drupal_get_path('module', 'hr_revisions') . '/css/hr_revisions.css');
   drupal_add_js(drupal_get_path('module', 'hr_revisions') . '/js/hr_revisions.js');
-  $revisioned_fields = array('field_sa_si_crisis', 'field_sa_si_gaps', 'field_sa_dc_needs', 'field_sa_dc_gaps', 'field_sa_cg_response', 'field_sa_cg_gaps', 'field_sa_pri_needs', 'field_sa_scenario');
+  $revisioned_fields = array('field_sectoral_analysis');
   hr_revisions_show_revisions($form, $form['#node'], 'sectoral_analysis', $revisioned_fields);
 }
 
@@ -73,8 +73,8 @@ function hr_revisions_show_revisions(&$form, $node, $content_type, $revisioned_f
         $previous_node = hr_revisions_get_previous_node($content_type, $previous_crf_request_nid, $cluster_tid);
         if ($previous_node) {
           foreach ($revisioned_fields as $field) {      
-            $form[$field]['und'][0]['value']['#default_value'] = $previous_node->{$field}['und'][0]['value'];
-            $description = t('This entry has been carried over from "@field_title" from @date', array('@field_title' => $form[$field]['und'][0]['value']['#title'], '@date' => format_date($previous_node->changed)));
+            $form[$field]['und'][0]['value']['#default_value'] = $previous_node->{$field}['und'][0]['value'];            
+            $description = t('This entry has been carried over from "@field_title" from @date', array('@field_title' => $form[$field]['und'][0]['#title'], '@date' => format_date($previous_node->changed)));
             $description .= ' <span class="hr-revisions-clear">' . t('clear') . '</span>';
             $form[$field]['und'][0]['value']['#description'] = $description;
           }
